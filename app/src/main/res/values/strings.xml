@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Group10_SQA_MentalHealthApp</string>
+    <string name="default_web_client_id">884230685423-39porea22rfv3a54jftk2th0n4utco7n.apps.googleusercontent.com</string>
+    <string name="server_auth_endpoint">https://10.0.2.2:8000/api/authenticate</string>
 </resources>
