@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Group10_SQA_MentalHealthApp</string>
+    <string name="app_name">Clayton</string>
     <string name="default_web_client_id">884230685423-39porea22rfv3a54jftk2th0n4utco7n.apps.googleusercontent.com</string>
     <string name="server_auth_endpoint">https://10.0.2.2:8000/api/authenticate</string>
+    <string name="journal_tab_text">Journal</string>
+    <string name="home_tab_text">Home</string>
+    <string name="goals_tab_text">Goals</string>
+    <string name="journal_switch_text">Journal</string>
+    <string name="blurt_switch_text">Blurt</string>
+    <string name="journal_hint_text">Write your journal entry here</string>
+    <string name="journal_submit_text">Submit</string>
+    <string name="journal_entry_header_text">Your Entries</string>
 </resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".JournalFragment">
+
+    <!-- Text Area for Journal Entry -->
+    <EditText
+        android:id="@+id/entryEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/journal_hint_text"
+        android:inputType="textMultiLine"
+        android:padding="16dp"
+        android:background="@drawable/edittext_normal"
+        android:gravity="top"
+        android:minLines="5"
+        android:maxLines="10"
+        android:scrollbars="vertical" />
+
+    <!-- Toggle and Submit Button Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- Current State (Journal/Blurt) -->
+        <TextView
+            android:id="@+id/tvMode"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/journal_switch_text"/>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"/>
+
+        <!-- Blurt/Journal Switch -->
+        <Switch
+            android:id="@+id/modeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="@string/journal_switch_text"
+            android:textOn="@string/blurt_switch_text" />
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- Word Count -->
+        <TextView
+            android:id="@+id/tvWordCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 words" />
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitEntryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/journal_submit_text" />
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <!-- Entries title -->
+    <TextView
+        android:id="@+id/titleEntries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/journal_entry_header_text"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Scrollable List for Previous Entries -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/entriesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

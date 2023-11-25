@@ -177,7 +177,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     private void finishAuthentication()
     {
-        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
     }
 
