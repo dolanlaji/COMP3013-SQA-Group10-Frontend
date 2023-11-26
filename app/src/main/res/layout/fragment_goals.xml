@@ -9,11 +9,18 @@
     android:gravity="center"
     tools:context=".GoalsFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Todo: Goal View"
-        android:textSize="18sp"
-        android:textAlignment="center" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="395dp"
+        android:layout_height="323dp">
 
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="394dp"
+        android:layout_height="18dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="394dp"
+        android:layout_height="302dp" />
 </LinearLayout>
