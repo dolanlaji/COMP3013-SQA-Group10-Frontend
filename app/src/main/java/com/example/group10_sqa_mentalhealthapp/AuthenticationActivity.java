@@ -1,6 +1,8 @@
 package com.example.group10_sqa_mentalhealthapp;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,9 +10,13 @@ import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityOptionsCompat;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.BeginSignInResult;
@@ -41,6 +47,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     public static final okhttp3.MediaType JSON_MEDIA_TYPE
             = okhttp3.MediaType.parse("application/json; charset=utf-8");
@@ -73,6 +80,27 @@ public class AuthenticationActivity extends AppCompatActivity {
                 finishAuthentication();
             }
         });
+
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    // This code feels like it took a wrong turn at an intersection early on in a trip
+                    // but has been following the rest of the directions diligently.
+
+                    // todo: rethink the Activity Stack
+                    // We want to have the Activity stack look like this (imo):
+                        // (Bottom)MainActivity -> Login Activity(Top)
+                        // IF valid first time login
+                            // Go back to MainActivity
+                            // Get redirected to the disclaimer with stack MainActivity -> Disclaimer
+                        // ELIF valid login
+                            // Go back to MainActivity
+                        // ELSE
+                            // Login Invalid, try again
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(i);
+                }
+        );
     }
 
     private void SetupOTP()
@@ -177,8 +205,8 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     private void finishAuthentication()
     {
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(i);
+        Intent i = new Intent(getApplicationContext(), DisclaimerActivity.class);
+        activityResultLauncher.launch(i);
     }
 
     private  void googleSignIn()
