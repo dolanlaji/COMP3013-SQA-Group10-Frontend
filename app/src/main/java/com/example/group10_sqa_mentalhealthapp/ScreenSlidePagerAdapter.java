@@ -33,14 +33,4 @@ public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
         return 3;
     }
 
-    public Fragment getFragment(int position) {
-        switch (position) {
-            case 0:
-                return journalFragment;
-            case 2:
-                return goalsFragment;
-            default:
-                return homeFragment;
-        }
-    }
 }

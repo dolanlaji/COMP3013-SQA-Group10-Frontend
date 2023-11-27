@@ -43,8 +43,8 @@ public class GoalsFragment extends Fragment {
         todoList = new ArrayList<>();
         doneList = new ArrayList<>();
 
-        GoalAdapter rvTodoAdapter = new GoalAdapter(todoList, getContext());
-        GoalAdapter rvDoneAdapter = new GoalAdapter(doneList, getContext());
+        GoalAdapter rvTodoAdapter = new GoalAdapter(todoList, this);
+        GoalAdapter rvDoneAdapter = new GoalAdapter(doneList, this);
 
         rvTodo.setAdapter(rvTodoAdapter);
         rvDone.setAdapter(rvDoneAdapter);
@@ -89,5 +89,6 @@ public class GoalsFragment extends Fragment {
     public void passToDone(GoalCard card) {
         doneList.add(card);
         Objects.requireNonNull(rvDone.getAdapter()).notifyItemInserted(doneList.size()-1);
+        rvDone.scrollToPosition(doneList.size()-1);
     }
 }

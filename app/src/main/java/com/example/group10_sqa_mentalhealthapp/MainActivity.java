@@ -44,8 +44,4 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
-
-    public ViewPager2 getViewPager() {
-        return viewPager;
-    }
 }
