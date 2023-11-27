@@ -8,6 +8,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.group10_sqa_mentalhealthapp.journal.JournalFragment;
 
 public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
+    private JournalFragment journalFragment;
+    private HomeFragment homeFragment;
+    private GoalsFragment goalsFragment;
     public ScreenSlidePagerAdapter(FragmentManager fm, Lifecycle lifecycle) {
         super(fm, lifecycle);
     }
@@ -16,13 +19,14 @@ public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new JournalFragment();
-            case 1:
-                return new HomeFragment();
+                journalFragment = new JournalFragment();
+                return journalFragment;
             case 2:
-                return new GoalsFragment();
+                goalsFragment = new GoalsFragment();
+                return goalsFragment;
             default:
-                return new HomeFragment();
+                homeFragment = new HomeFragment();
+                return homeFragment;
         }
     }
 
@@ -30,4 +34,5 @@ public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return 3;
     }
+
 }
