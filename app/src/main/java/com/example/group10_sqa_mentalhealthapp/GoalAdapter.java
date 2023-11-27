@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder> {
 
@@ -37,12 +39,26 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder
 
         holder.bind(card.title);
 
-        // todo: implement the cards moving between recyclerviews
-//        itemView.findViewById(R.id.todo_done_button)
-//                .setOnClickListener((View v) -> {
-//
-//                }
-//                );
+        if(card.done) {
+            itemView.findViewById(R.id.todo_done_button).setEnabled(false);
+        }
+        else {
+            itemView.findViewById(R.id.todo_done_button)
+                    .setOnClickListener((View v) -> {
+                                card.done = true;
+                                int pos = tasks.indexOf(card);
+                                tasks.remove(card);
+                                notifyItemRemoved(pos);
+                                MainActivity activity = (MainActivity) itemView.getContext();
+                                ViewPager2 viewPager = (ViewPager2) activity.getViewPager();
+                                ScreenSlidePagerAdapter vpAdapter =
+                                        (ScreenSlidePagerAdapter) viewPager.getAdapter();
+                                assert vpAdapter != null;
+                                GoalsFragment goalsFragment = (GoalsFragment) vpAdapter.getFragment(2);
+                                goalsFragment.passToDone(card);
+                            }
+                    );
+        }
     }
 
     @Override

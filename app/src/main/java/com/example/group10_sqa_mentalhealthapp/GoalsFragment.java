@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,26 +24,36 @@ import java.util.Objects;
 public class GoalsFragment extends Fragment {
 
     ActivityResultLauncher<Intent> activityResultLauncher;
-    List<GoalCard> list;
+    private List<GoalCard> todoList;
+    private List<GoalCard> doneList;
+    private RecyclerView rvTodo;
+    private RecyclerView rvDone;
 
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_goals, container, false);
 
         Button addGoalButt = view.findViewById(R.id.add_goal_button);
-        RecyclerView rvTodo = view.findViewById(R.id.todo_recycler);
+        rvTodo = view.findViewById(R.id.todo_recycler);
+        rvDone = view.findViewById(R.id.done_recycler);
 
-        list = new ArrayList<>();
+        todoList = new ArrayList<>();
+        doneList = new ArrayList<>();
 
-        GoalAdapter rvTodoAdapter = new GoalAdapter(list, getContext());
+        GoalAdapter rvTodoAdapter = new GoalAdapter(todoList, getContext());
+        GoalAdapter rvDoneAdapter = new GoalAdapter(doneList, getContext());
 
         rvTodo.setAdapter(rvTodoAdapter);
+        rvDone.setAdapter(rvDoneAdapter);
         rvTodo.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvDone.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // todo: maybe instead of an activity we can get like a modal to come up?
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     int resultCode = result.getResultCode();
 
@@ -59,10 +68,10 @@ public class GoalsFragment extends Fragment {
                         GoalCard card = new GoalCard();
                         card.title = bundle.getString("goalTitle");
 
-                        list.add(card);
+                        todoList.add(card);
 
-                        rvTodoAdapter.notifyItemInserted(list.size()-1);
-                        rvTodo.scrollToPosition(list.size()-1);
+                        rvTodoAdapter.notifyItemInserted(todoList.size()-1);
+                        rvTodo.scrollToPosition(todoList.size()-1);
                     }
                 }
         );
@@ -75,5 +84,10 @@ public class GoalsFragment extends Fragment {
         addGoalButt.setOnClickListener(addGoalListener);
 
         return view;
+    }
+
+    public void passToDone(GoalCard card) {
+        doneList.add(card);
+        Objects.requireNonNull(rvDone.getAdapter()).notifyItemInserted(doneList.size()-1);
     }
 }
