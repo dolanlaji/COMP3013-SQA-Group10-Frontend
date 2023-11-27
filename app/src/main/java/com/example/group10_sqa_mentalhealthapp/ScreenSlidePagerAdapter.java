@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.group10_sqa_mentalhealthapp.journal.JournalFragment;
+
 public class ScreenSlidePagerAdapter extends FragmentStateAdapter {
     public ScreenSlidePagerAdapter(FragmentManager fm, Lifecycle lifecycle) {
         super(fm, lifecycle);

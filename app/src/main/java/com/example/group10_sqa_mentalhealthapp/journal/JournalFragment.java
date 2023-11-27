@@ -1,11 +1,11 @@
-package com.example.group10_sqa_mentalhealthapp;
+package com.example.group10_sqa_mentalhealthapp.journal;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,26 +15,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import android.view.LayoutInflater;
 
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.group10_sqa_mentalhealthapp.R;
+import com.example.group10_sqa_mentalhealthapp.safety.ContentSafetyHandler;
+
 public class JournalFragment extends Fragment {
     private EditText entryEditText;
     private Button submitButton;
     private RecyclerView entriesRecyclerView;
-    private List<JournalEntry> entries;
     private JournalEntryAdapter adapter;
 
     private Switch modeSwitch;
@@ -47,18 +47,10 @@ public class JournalFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journal, container, false);
 
-        tvMode = view.findViewById(R.id.tvMode);
-        tvWordCount = view.findViewById(R.id.tvWordCount);
-        entryEditText = view.findViewById(R.id.entryEditText);
-        submitButton = view.findViewById(R.id.submitEntryButton);
-        entriesRecyclerView = view.findViewById(R.id.entriesRecyclerView);
-        modeSwitch = view.findViewById(R.id.modeSwitch);
+        // Initialize views
+        initializeViews(view);
 
-        entries = new ArrayList<>();
-        adapter = new JournalEntryAdapter(entries);
-
-        entriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        entriesRecyclerView.setAdapter(adapter);
+        setupRecyclerView();
 
         setupSwitch();
         setupSubmitButton(view);
@@ -70,7 +62,47 @@ public class JournalFragment extends Fragment {
             return false;
         });
 
+        attachObserver();
+
         return view;
+    }
+
+    private void initializeViews(View view) {
+        tvMode = view.findViewById(R.id.tvMode);
+        tvWordCount = view.findViewById(R.id.tvWordCount);
+        entryEditText = view.findViewById(R.id.entryEditText);
+        submitButton = view.findViewById(R.id.submitEntryButton);
+        entriesRecyclerView = view.findViewById(R.id.entriesRecyclerView);
+        modeSwitch = view.findViewById(R.id.modeSwitch);
+    }
+
+    private void setupRecyclerView() {
+        adapter = new JournalEntryAdapter(new ArrayList<>(), this::onOpenJournalEntry);
+        entriesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        entriesRecyclerView.setAdapter(adapter);
+    }
+
+    private void attachObserver()
+    {
+        JournalRepository repository = JournalRepository.getInstance(requireActivity().getApplication());
+        // Re-attach the observer
+        repository.getAllEntries().removeObservers(getViewLifecycleOwner());
+        repository.getAllEntries().observe(getViewLifecycleOwner(), entries -> {
+            adapter.setEntries(entries);
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    private void onOpenJournalEntry(JournalEntry entry)
+    {
+        Intent journalViewIntent = new Intent(getContext(), JournalViewActivity.class);
+        journalViewIntent.putExtra("journalEntry", entry);
+        startActivity(journalViewIntent);
     }
 
     private void hideKeyboard(View view) {
@@ -105,11 +137,15 @@ public class JournalFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // Not used
+                // Check contents for safety words
+                if (ContentSafetyHandler.getInstance().checkContents(s.toString())) {
+                    showToastSafetyMessage();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                // Update word count
                 int wordCount = countWords(s.toString());
                 tvWordCount.setText(wordCount + " words");
             }
@@ -124,22 +160,22 @@ public class JournalFragment extends Fragment {
         });
     }
 
+    private void showToastSafetyMessage() {
+        // Inflate the custom layout
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        ContentSafetyHandler.getInstance().showDistressMessage(inflater, getContext());
+    }
+
     private void setupSubmitButton(View view) {
         submitButton.setOnClickListener(v -> {
             String text = entryEditText.getText().toString();
-            if (!text.isEmpty()) {
-                if (!isBlurtMode) {
-                    // Journal mode: Add to the journal
-                    JournalEntry entry = new JournalEntry();
-                    entry.content = text;
-                    entry.localDateTime = new Date();
-                    entries.add(0, entry);
-                    adapter.notifyItemInserted(0);
-                }
-                // Clear the text whether it's Blurt or Journal mode
-                entryEditText.setText("");
-                entriesRecyclerView.scrollToPosition(0);
+            if (!text.isEmpty() && !isBlurtMode) {
+                JournalEntry entry = new JournalEntry();
+                entry.content = text;
+                entry.localDateTime = new Date();
+                JournalRepository.getInstance(requireActivity().getApplication()).addEntry(entry);
             }
+            entryEditText.setText("");
         });
     }
 }
