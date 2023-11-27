@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -18,11 +19,13 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder
 
     private final List<GoalCard> tasks;
     private View itemView;
-    private Context context;
+    private final Context context;
+    private GoalsFragment goalsFragment;
 
-    public GoalAdapter(List<GoalCard> tasks, Context context) {
+    public GoalAdapter(List<GoalCard> tasks, GoalsFragment fragment) {
         this.tasks = tasks;
-        this.context = context;
+        this.goalsFragment = fragment;
+        this.context = fragment.getContext();
     }
 
     @NonNull
@@ -40,23 +43,30 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder
         holder.bind(card.title);
 
         if(card.done) {
+            Log.d("DEBUG_Dan", "onBindViewHolder: DoneList:");
+            for(int i = 0; i < tasks.size(); i++) {
+                Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
+            }
             itemView.findViewById(R.id.todo_done_button).setEnabled(false);
         }
         else {
             itemView.findViewById(R.id.todo_done_button)
                     .setOnClickListener((View v) -> {
-                                card.done = true;
-                                int pos = tasks.indexOf(card);
-                                tasks.remove(card);
-                                notifyItemRemoved(pos);
-                                MainActivity activity = (MainActivity) itemView.getContext();
-                                ViewPager2 viewPager = (ViewPager2) activity.getViewPager();
-                                ScreenSlidePagerAdapter vpAdapter =
-                                        (ScreenSlidePagerAdapter) viewPager.getAdapter();
-                                assert vpAdapter != null;
-                                GoalsFragment goalsFragment = (GoalsFragment) vpAdapter.getFragment(2);
-                                goalsFragment.passToDone(card);
-                            }
+                        Log.d("DEBUG_Dan", "onBindViewHolder: TodoList Before:");
+                        for(int i = 0; i < tasks.size(); i++) {
+                            Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
+                        }
+                        card.done = true;
+                        int pos = tasks.indexOf(card);
+                        tasks.remove(card);
+                        Log.d("DEBUG_Dan", "Item removed: " + pos + ": " + card.title);
+                        notifyItemRemoved(pos);
+                        Log.d("DEBUG_Dan", "onBindViewHolder: TodoList After:");
+                        for(int i = 0; i < tasks.size(); i++) {
+                            Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
+                        }
+                        goalsFragment.passToDone(card);
+                    }
                     );
         }
     }
