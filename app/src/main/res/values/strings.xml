@@ -9,5 +9,8 @@
     <string name="blurt_switch_text">Blurt</string>
     <string name="journal_hint_text">Write your journal entry here</string>
     <string name="journal_submit_text">Submit</string>
+    <string name="journal_delete_text">Delete</string>
     <string name="journal_entry_header_text">Your Entries</string>
+    <string name="distress_message">If you\'re feeling distressed, please reach out for support.</string>
+    <string name="distress_message_contact">Call 116 123 to contact the Samaritans</string>
 </resources>
