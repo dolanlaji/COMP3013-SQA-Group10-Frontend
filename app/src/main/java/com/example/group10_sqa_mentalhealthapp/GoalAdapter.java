@@ -18,7 +18,6 @@ import java.util.Scanner;
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder> {
 
     private final List<GoalCard> tasks;
-    private View itemView;
     private final Context context;
     private GoalsFragment goalsFragment;
 
@@ -31,7 +30,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder
     @NonNull
     @Override
     public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        itemView = LayoutInflater.from(context)
+        View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.item_layout_goals, parent, false);
         return new TodoViewHolder(itemView);
     }
@@ -47,10 +46,10 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder
             for(int i = 0; i < tasks.size(); i++) {
                 Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
             }
-            itemView.findViewById(R.id.todo_done_button).setEnabled(false);
+            holder.itemView.findViewById(R.id.todo_done_button).setEnabled(false);
         }
         else {
-            itemView.findViewById(R.id.todo_done_button)
+            holder.itemView.findViewById(R.id.todo_done_button)
                     .setOnClickListener((View v) -> {
                         Log.d("DEBUG_Dan", "onBindViewHolder: TodoList Before:");
                         for(int i = 0; i < tasks.size(); i++) {
