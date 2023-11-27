@@ -42,28 +42,15 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.TodoViewHolder
         holder.bind(card.title);
 
         if(card.done) {
-            Log.d("DEBUG_Dan", "onBindViewHolder: DoneList:");
-            for(int i = 0; i < tasks.size(); i++) {
-                Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
-            }
             holder.itemView.findViewById(R.id.todo_done_button).setEnabled(false);
         }
         else {
             holder.itemView.findViewById(R.id.todo_done_button)
                     .setOnClickListener((View v) -> {
-                        Log.d("DEBUG_Dan", "onBindViewHolder: TodoList Before:");
-                        for(int i = 0; i < tasks.size(); i++) {
-                            Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
-                        }
                         card.done = true;
                         int pos = tasks.indexOf(card);
                         tasks.remove(card);
-                        Log.d("DEBUG_Dan", "Item removed: " + pos + ": " + card.title);
                         notifyItemRemoved(pos);
-                        Log.d("DEBUG_Dan", "onBindViewHolder: TodoList After:");
-                        for(int i = 0; i < tasks.size(); i++) {
-                            Log.d("DEBUG_Dan", i + ": " + tasks.get(i).title);
-                        }
                         goalsFragment.passToDone(card);
                     }
                     );
