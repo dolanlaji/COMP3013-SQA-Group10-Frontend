@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewPager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        viewPager.setCurrentItem(1, false);
 
         viewPager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager(), getLifecycle()));
 
@@ -43,5 +44,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        // Set the default selected item in the BottomNavigationView
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     }
 }
