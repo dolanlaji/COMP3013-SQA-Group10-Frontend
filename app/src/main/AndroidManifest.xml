@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Group10_SQA_MentalHealthApp"
         tools:targetApi="31">
         <activity
+            android:name=".DisclaimerActivity"
+            android:exported="false" />
+        <activity
             android:name=".GoalCreation"
             android:exported="false" />
         <activity
