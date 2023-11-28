@@ -10,10 +10,39 @@
     tools:context=".GoalsFragment">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Todo: Goal View"
-        android:textSize="18sp"
-        android:textAlignment="center" />
+        android:layout_marginTop="20dp"
+        android:text="To do:"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/todo_recycler"
+        android:layout_width="350dp"
+        android:layout_height="200dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Done:"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/done_recycler"
+        android:layout_width="350dp"
+        android:layout_height="200dp" />
+
+    <Button
+        android:id="@+id/add_goal_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:onClick="onAddGoalClick"
+        android:text="Add goal" />
 </LinearLayout>

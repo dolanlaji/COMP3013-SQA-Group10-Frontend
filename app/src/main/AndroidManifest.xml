@@ -20,7 +20,13 @@
             android:name=".DisclaimerActivity"
             android:exported="false" />
         <activity
+            android:name=".GoalCreation"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".journal.JournalViewActivity"
             android:exported="false" />
         <activity
             android:name=".AuthenticationActivity"

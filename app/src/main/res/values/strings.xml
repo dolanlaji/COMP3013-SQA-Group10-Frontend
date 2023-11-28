@@ -9,6 +9,7 @@
     <string name="blurt_switch_text">Blurt</string>
     <string name="journal_hint_text">Write your journal entry here</string>
     <string name="journal_submit_text">Submit</string>
+    <string name="journal_delete_text">Delete</string>
     <string name="journal_entry_header_text">Your Entries</string>
     <string name="disclaimer_text">"Clayton is designed for entertainment purposes and to promote positive well-being. It is important to note that Clayton is not a substitute for professional mental health advice, diagnosis, or treatment. Users are encouraged to consult with qualified healthcare professionals for any concerns related to their mental health.
 
@@ -29,4 +30,6 @@ Privacy and User Responsibility:
     User Discretion: Users are responsible for their mental well-being and should exercise discretion when using the App. If the content or activities within the App cause distress, it is recommended to discontinue use.
 
 By using Clayton, you acknowledge that you have read and understood this disclaimer. If you have concerns about your mental health, it is crucial to consult with a qualified professional. The App's developers and operators are not liable for any consequences resulting from the misuse or reliance on the App in lieu of professional advice."</string>
+    <string name="distress_message">If you\'re feeling distressed, please reach out for support.</string>
+    <string name="distress_message_contact">Call 116 123 to contact the Samaritans</string>
 </resources>
