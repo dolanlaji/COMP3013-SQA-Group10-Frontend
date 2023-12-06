@@ -43,15 +43,30 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
+/**
+ * Activity responsible for user authentication and interaction with the backend server.
+ *
+ * <p>This activity provides functionality for user authentication through Google One Tap and basic authentication.
+ * It communicates with the backend server for authentication and redirects the user based on the authentication result.
+ */
 public class AuthenticationActivity extends AppCompatActivity {
 
+
+
+    // One Tap authentication client
     private SignInClient oneTapClient;
+
+    // One Tap sign-in request
     private BeginSignInRequest signInRequest;
+
+    // Activity result launcher for handling activity results
     private ActivityResultLauncher<Intent> activityResultLauncher;
 
+    // Media type for JSON requests
     public static final okhttp3.MediaType JSON_MEDIA_TYPE
             = okhttp3.MediaType.parse("application/json; charset=utf-8");
 
+    // OkHttpClient with custom hostname verifier
     private final OkHttpClient httpClient = new OkHttpClient.Builder().hostnameVerifier(new HostnameVerifier() {
         // todo: this is very very bad, we need to verify local cert hostname somehow i'll be on it - elliot
         @Override
@@ -60,13 +75,21 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     }).build();
 
+    // Tag for logging
     private static final String TAG = "AuthenticationActivity";
 
+
+    /**
+     * Initializes the activity, sets the content view, and sets up UI components.
+     *
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
+        // Find and set click listeners for authentication buttons
         Button googleAuthButton = (Button) findViewById(R.id.googleauthbtn);
         googleAuthButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -81,6 +104,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         });
 
+        // Register the activity result launcher for handling activity results
         activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -89,20 +113,24 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                     // todo: rethink the Activity Stack
                     // We want to have the Activity stack look like this (imo):
-                        // (Bottom)MainActivity -> Login Activity(Top)
-                        // IF valid first time login
-                            // Go back to MainActivity
-                            // Get redirected to the disclaimer with stack MainActivity -> Disclaimer
-                        // ELIF valid login
-                            // Go back to MainActivity
-                        // ELSE
-                            // Login Invalid, try again
+                    // (Bottom)MainActivity -> Login Activity(Top)
+                    // IF valid first time login
+                    // Go back to MainActivity
+                    // Get redirected to the disclaimer with stack MainActivity -> Disclaimer
+                    // ELIF valid login
+                    // Go back to MainActivity
+                    // ELSE
+                    // Login Invalid, try again
+                    // Redirect to MainActivity upon completion
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(i);
                 }
         );
     }
-
+    /**
+     * Initiates the setup for Google One Tap authentication.
+     * Invoked when the Google authentication button is clicked.
+     */
     private void SetupOTP()
     {
         Log.d(TAG, "Creating google one tap client");
@@ -126,6 +154,11 @@ public class AuthenticationActivity extends AppCompatActivity {
         googleSignIn();
     }
 
+
+    /**
+     * Handles the result of the Google One Tap sign-in flow.
+     * Redirects to the appropriate screen based on the sign-in result.
+     */
     private final ActivityResultLauncher<IntentSenderRequest> loginResultHandler = registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(), result -> {
         // handle intent result here
         if (result.getResultCode() == RESULT_OK) {
@@ -154,8 +187,15 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     });
 
+    /**
+     * Sends an authentication request to the backend server.
+     *
+     * @param type   The type of authentication (e.g., "google", "basic").
+     * @param secret The authentication secret.
+     */
     private void sendBackendAuthenticationRequest(String type, String secret)
     {
+        // Backend authentication request code
         // todo: clean up thread
         Thread networkAuthenticationThread = new Thread(new Runnable() {
             @Override
@@ -203,12 +243,19 @@ public class AuthenticationActivity extends AppCompatActivity {
         Log.d(TAG, "Running network authentication thread: " + networkAuthenticationThread.getName());
     }
 
+    /**
+     * Finishes the authentication process and redirects to the appropriate screen.
+     */
     private void finishAuthentication()
     {
         Intent i = new Intent(getApplicationContext(), DisclaimerActivity.class);
         activityResultLauncher.launch(i);
     }
 
+    /**
+     * Initiates the Google One Tap sign-in process.
+     * On success, launches the loginResultHandler to handle the sign-in result.
+     */
     private  void googleSignIn()
     {
         oneTapClient.beginSignIn(signInRequest)
