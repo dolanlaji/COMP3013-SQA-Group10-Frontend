@@ -1,6 +1,7 @@
 package com.example.group10_sqa_mentalhealthapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class PetStatsActivity extends AppCompatActivity {
 
         RecyclerView statRecyclerView = (RecyclerView) findViewById(R.id.stats_recycler);
         statRecyclerView.setAdapter(new PetStatAdapter(pairList, this));
+        statRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private List<Pair<PetStatCard, PetStatCard>> itemPairer(List<PetStatCard> inputList) {
