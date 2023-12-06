@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stat_card"
-        android:layout_width="187dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -18,12 +18,12 @@
 
         <ImageView
             android:id="@+id/bg_stat_card"
-            android:layout_width="187dp"
+            android:layout_width="160dp"
             android:layout_height="94dp"
+            android:background="@drawable/stat_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/stat_container" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/prompt_stat_card"
@@ -31,7 +31,8 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text="Total Journal Entries Written: [temp]"
-            android:textSize="24sp"
+            android:textColor="#000000"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/bg_stat_card"
             app:layout_constraintEnd_toEndOf="@+id/bg_stat_card"
             app:layout_constraintStart_toStartOf="@+id/bg_stat_card"
@@ -44,7 +45,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="[temp]"
-            android:textSize="34sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@id/bg_stat_card"
             app:layout_constraintStart_toStartOf="@id/bg_stat_card"
             app:layout_constraintTop_toBottomOf="@id/bg_stat_card" />
@@ -52,7 +53,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stat_card_2"
-        android:layout_width="187dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -63,12 +64,12 @@
 
         <ImageView
             android:id="@+id/bg_stat_card_2"
-            android:layout_width="187dp"
+            android:layout_width="160dp"
             android:layout_height="94dp"
+            android:background="@drawable/stat_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/stat_container" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/prompt_stat_card_2"
@@ -76,7 +77,8 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text="Total Tasks Completed: [temp]"
-            android:textSize="24sp"
+            android:textColor="#000000"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/bg_stat_card_2"
             app:layout_constraintEnd_toEndOf="@+id/bg_stat_card_2"
             app:layout_constraintStart_toStartOf="@+id/bg_stat_card_2"
@@ -89,7 +91,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="[temp]"
-            android:textSize="34sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@id/bg_stat_card_2"
             app:layout_constraintStart_toStartOf="@id/bg_stat_card_2"
             app:layout_constraintTop_toBottomOf="@id/bg_stat_card_2" />
