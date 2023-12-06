@@ -11,6 +11,12 @@
     <string name="journal_submit_text">Submit</string>
     <string name="journal_delete_text">Delete</string>
     <string name="journal_entry_header_text">Your Entries</string>
+    <string-array name="stat_prompts">
+        <item>Overall Tasks completed:</item>
+        <item>Tasks Completed Today:</item>
+        <item>Total Journal Entries Stored:</item>
+        <item>Affirmation</item>
+    </string-array>
     <string name="disclaimer_text">"Clayton is designed for entertainment purposes and to promote positive well-being. It is important to note that Clayton is not a substitute for professional mental health advice, diagnosis, or treatment. Users are encouraged to consult with qualified healthcare professionals for any concerns related to their mental health.
 
 Important Points to Consider:

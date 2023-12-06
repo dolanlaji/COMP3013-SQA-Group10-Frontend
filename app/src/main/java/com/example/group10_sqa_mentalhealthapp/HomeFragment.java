@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 public class HomeFragment extends Fragment {
 
@@ -18,6 +20,17 @@ public class HomeFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
 
+        Button petStatButt = (Button) view.findViewById(R.id.pet_stat_button);
+
+        View.OnClickListener addPetStatListener = clickListenerView -> {
+            Intent i = new Intent(getActivity(), PetStatsActivity.class);
+            startActivity(i);
+        };
+
+        petStatButt.setOnClickListener(addPetStatListener);
+
         return view;
     }
+
+
 }
