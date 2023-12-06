@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import java.util.ArrayList;
@@ -36,6 +37,11 @@ public class JournalFragment extends Fragment {
     private Button submitButton;
     private RecyclerView entriesRecyclerView;
     private JournalEntryAdapter adapter;
+
+    private LinearLayout journalLayout;
+    private LinearLayout pinCodeLayout;
+    private EditText pinCodeEditText;
+    private Button enterPinButton;
 
     private Switch modeSwitch;
     private boolean isBlurtMode = false;
@@ -62,6 +68,8 @@ public class JournalFragment extends Fragment {
             return false;
         });
 
+        setupPinCodeEntry();
+
         attachObserver();
 
         return view;
@@ -74,6 +82,29 @@ public class JournalFragment extends Fragment {
         submitButton = view.findViewById(R.id.submitEntryButton);
         entriesRecyclerView = view.findViewById(R.id.entriesRecyclerView);
         modeSwitch = view.findViewById(R.id.modeSwitch);
+        pinCodeLayout = view.findViewById(R.id.pinCodeLayout);
+        journalLayout = view.findViewById(R.id.journalLayout);
+        pinCodeEditText = view.findViewById(R.id.pinCodeEditText);
+        enterPinButton = view.findViewById(R.id.enterPinButton);
+    }
+
+    private void setupPinCodeEntry() {
+        journalLayout.setVisibility(View.GONE);
+        pinCodeLayout.setVisibility(View.VISIBLE);
+
+        enterPinButton.setOnClickListener(v -> {
+            String pinCode = pinCodeEditText.getText().toString();
+            if (isCorrectPinCode(pinCode)) {
+                journalLayout.setVisibility(View.VISIBLE);
+                pinCodeLayout.setVisibility(View.GONE);
+            } else {
+                Toast.makeText(getContext(), "Incorrect Pin Code", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private boolean isCorrectPinCode(String pinCode) {
+        return "1234".equals(pinCode); // todo: save to user object
     }
 
     private void setupRecyclerView() {
