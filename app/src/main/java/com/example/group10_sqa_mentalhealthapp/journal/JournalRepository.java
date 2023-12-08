@@ -14,7 +14,8 @@ public class JournalRepository {
     private final JournalEntryDao dao;
 
     private JournalRepository(Application application) {
-        AppDatabase db = AppDatabase.getDatabase(application.getApplicationContext());
+        AppDatabase db = Room.databaseBuilder(application,
+                AppDatabase.class, "journal_database").build();
         dao = db.journalEntryDao();
     }
 
