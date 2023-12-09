@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShopFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/beanie"
+        android:src="@drawable/beanie"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        />
+
+    <Button
+        android:id="@+id/tealButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_teal"
+        android:layout_marginTop="125dp"
+        android:layout_marginLeft="125dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:background="@drawable/circle_text"
+        android:textStyle="bold"
+        android:layout_marginLeft="138dp"
+        android:layout_marginTop="185dp"
+        android:padding="3dp"
+        />
+    <Button
+        android:id="@+id/redButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_red"
+        android:layout_marginTop="125dp"
+        android:layout_marginLeft="200dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:background="@drawable/circle_text"
+        android:textStyle="bold"
+        android:layout_marginLeft="213dp"
+        android:layout_marginTop="310dp"
+        android:padding="3dp"
+        />
+
+    <Button
+        android:id="@+id/pinkButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_pink"
+        android:layout_marginTop="125dp"
+        android:layout_marginLeft="275dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:background="@drawable/circle_text"
+        android:textStyle="bold"
+        android:layout_marginLeft="288dp"
+        android:layout_marginTop="310dp"
+        android:padding="3dp"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/hat"
+        android:src="@drawable/hat"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="225dp"
+        />
+
+    <Button
+        android:id="@+id/tealButton2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_teal"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="125dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:background="@drawable/circle_text"
+        android:textStyle="bold"
+        android:layout_marginLeft="138dp"
+        android:layout_marginTop="310dp"
+        android:padding="3dp"
+        />
+    <Button
+        android:id="@+id/redButton2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_red"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="200dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:background="@drawable/circle_text"
+        android:textStyle="bold"
+        android:layout_marginLeft="213dp"
+        android:layout_marginTop="185dp"
+        android:padding="3dp"
+        />
+
+    <Button
+        android:id="@+id/pinkButton2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/circle_pink"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="275dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:background="@drawable/circle_text"
+        android:textStyle="bold"
+        android:layout_marginLeft="288dp"
+        android:layout_marginTop="185dp"
+        android:padding="3dp"
+        />
+
+</RelativeLayout>

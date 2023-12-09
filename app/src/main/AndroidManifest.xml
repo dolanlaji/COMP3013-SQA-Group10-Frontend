@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Group10_SQA_MentalHealthApp"
         tools:targetApi="31">
         <activity
+            android:name=".ShopActivity"
+            android:exported="false" />
+        <activity
             android:name=".PetStatsActivity"
             android:exported="false" />
         <activity

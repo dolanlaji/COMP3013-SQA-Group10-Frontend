@@ -35,11 +35,23 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Button petStatButt = (Button) view.findViewById(R.id.pet_stat_button);
+        Button buttonNavigate = view.findViewById(R.id.shopButton);
 
         View.OnClickListener addPetStatListener = clickListenerView -> {
             Intent i = new Intent(getActivity(), PetStatsActivity.class);
             startActivity(i);
         };
+
+        buttonNavigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to navigate to SecondActivity
+                Intent intent = new Intent(getActivity(), ShopActivity.class);
+
+                // Start the SecondActivity
+                startActivity(intent);
+            }
+        });
 
         petStatButt.setOnClickListener(addPetStatListener);
 
